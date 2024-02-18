@@ -26,4 +26,61 @@ body {
     display: grid;
     padding: 5rem;
     background: #070707;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
 }
+
+.profile {
+    grid-column: 1 / -1;
+}
+
+.profile_container{
+    display: flex;
+    gap: 2rem;
+}
+
+.skills {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+.skill li{
+    display: inline-block;
+    margin: 0, auto;
+    padding: 3rem;
+    
+}
+
+.skill li span {
+    cursor: pointer;
+}
+
+.progress_line {
+    position: relative;
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 90%;
+    height: 5px;
+    background-color: whitesmoke;
+    animation: animate 1s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+    transform: scaleX(0);
+    transform-origin: left;
+    
+}
+
+@keyframes animate{
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+.progress_line span {
+    position: absolute;
+    height: 100%;
+    width: 20%;
+    border-radius: 10px;
+    background-color: cyan;
+    animation: animate 1s 1s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+    left: 0;
+}
+
