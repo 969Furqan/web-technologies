@@ -20,7 +20,7 @@ body {
 }
 
 .Container {
-    max-width: 1000px;
+    max-width: 95%;
     width: 90%;
     margin: 0 auto;
     display: grid;
@@ -39,30 +39,22 @@ body {
     gap: 2rem;
 }
 
-.skills {
-    grid-column: 1 / -1;
+
+.skill_head{
     text-align: center;
+    padding: 2.5em 0;
 }
 
-.skill li{
-    display: inline-block;
-    margin: 0, auto;
-    padding: 3rem;
-    
-}
-
-.skill li span {
-    cursor: pointer;
-}
 
 .progress_line {
     position: relative;
+    
     border-radius: 10px;
-    margin: 0 auto;
+    margin: 2rem auto;
     width: 90%;
-    height: 5px;
+    height: 10px;
     background-color: whitesmoke;
-    animation: animate 1s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+    animation: animate 1.5s cubic-bezier(0.42, 0, 0.58, 1) forwards;
     transform: scaleX(0);
     transform-origin: left;
     
@@ -74,13 +66,66 @@ body {
     }
 }
 
-.progress_line span {
+#line1{
+    animation-delay: 0.25s;
+}
+#line2{
+    animation-delay: 0.5s;
+}
+#line3{
+    animation-delay: 0.75s;
+}
+#line4{
+    animation-delay: 1s;
+}
+#line5{
+    animation-delay: 1.25s;
+}
+#line6{
+    animation-delay: 1.5s;
+}
+
+.progress_status {
     position: absolute;
     height: 100%;
     width: 20%;
     border-radius: 10px;
-    background-color: cyan;
-    animation: animate 1s 1s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+    animation: animate 1s cubic-bezier(0.42, 0, 0.58, 1) forwards;
     left: 0;
 }
+
+#progress_status_mern {
+    animation-delay: 0.5s;
+    background-color: #0096FF;
+    width: 20%;
+}
+
+#progress_status_java {
+    animation-delay: 1s;
+    background-color: #0096FF;
+    width: 75%;
+}
+
+#progress_status_python {
+    animation-delay: 1.5s;
+    background-color: #0096FF;
+    width: 50%;
+}
+
+#progress_status_c {
+    animation-delay: 2s;
+    background-color: #0096FF;
+    width: 80%;
+}
+#progress_status_networks {
+    animation-delay: 2.5s;
+    background-color: #0096FF;
+    width: 70%;
+}
+#progress_status_flutter {
+    animation-delay: 3s;
+    background-color: #0096FF;
+    width: 60%;
+}
+
 
