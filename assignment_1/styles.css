@@ -6,6 +6,14 @@
     box-sizing: border-box;
 }
 
+:root{
+    --primary-color: #0096FF;
+    --secondary-color: #070707;
+    --tertiary-color: #F2F2F2;
+    --quaternary-color: #F2F2F2;
+    --quinary-color: #F2F2F2;
+}
+
 
 html {
     font-size: 10px;
@@ -22,7 +30,7 @@ body {
     margin: 0 auto;
     display: grid;
     padding: 5rem;
-    background: #070707;
+    background: var(--secondary-color);
     grid-template-columns: 1fr 1fr 1fr;
     gap: 4rem;
 }
@@ -54,18 +62,23 @@ body {
 
 .fname{
     font-size: 35px;
-    color: #0096FF;
+    color: var(--primary-color);
 }
 
 #skl{
     grid-column: 1;
-    margin-top: 2rem;
     margin-right: 10%;
 }
 
 .skill_head{
     text-align: center;
     padding: 2.5em 0;
+    font-size: large;
+    letter-spacing: 0.1em;
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.2em;
+    text-underline-position: below;
 }
 
 i{
@@ -75,12 +88,11 @@ i{
 
 .progress_line {
     position: relative;
-    
     border-radius: 10px;
     margin: 2rem auto;
     width: 80%;
     height: 10px;
-    background-color: whitesmoke;
+    background-color: var(--quaternary-color);
     animation: animate 1.5s cubic-bezier(0.42, 0, 0.58, 1) forwards;
     transform: scaleX(0);
     transform-origin: left;
@@ -117,42 +129,52 @@ i{
     height: 100%;
     width: 20%;
     border-radius: 10px;
-    animation: animate 1s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+    background-color: var(--primary-color);
+    animation: animate 1.5s cubic-bezier(0.42, 0, 0.58, 1) forwards;
     left: 0;
 }
 
 #progress_status_mern {
-    animation-delay: 0.5s;
-    background-color: #0096FF;
+    animation-delay: 0.25s;
     width: 20%;
 }
 
 #progress_status_java {
-    animation-delay: 1s;
-    background-color: #0096FF;
+    animation-delay: 0.5s;
     width: 75%;
 }
 
 #progress_status_python {
-    animation-delay: 1.5s;
-    background-color: #0096FF;
+    animation-delay: 0.75s;
     width: 50%;
 }
 
 #progress_status_c {
-    animation-delay: 2s;
-    background-color: #0096FF;
+    animation-delay: 1s;
     width: 80%;
 }
 #progress_status_networks {
-    animation-delay: 2.5s;
-    background-color: #0096FF;
+    animation-delay: 1.25s;
     width: 70%;
 }
 #progress_status_flutter {
-    animation-delay: 3s;
-    background-color: #0096FF;
+    animation-delay: 1.5s;
     width: 60%;
 }
 
 
+.experience{
+    grid-column: 2 / -1;
+    margin: 0 auto;
+}
+
+.experience_head{
+    text-align: center;
+    padding: 2.5em 0;
+    font-size: large;
+    letter-spacing: 0.1em;
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.2em;
+    text-underline-position: below;
+}
