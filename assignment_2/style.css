@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Shadow&family=Ruthie&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chathura:wght@100;300;400;700;800&family=Londrina+Shadow&family=Ruthie&display=swap');
+
+::-webkit-scrollbar{
+    display: none;
+}
+body{
+    font-family: chaturha;
+}
+
+#body-home{
+    background-color: #dfd8c7 !important;
+}
+
+.navbar-brand{
+    font-size: 50px;
+    font-weight: bold;
+    color: #9d8464;
+    font-family: "Londrina Shadow";
+}
+.navbar-brand:focus, .navbar-brand:hover{
+    color: #9d8464;
+}
+
+h1{
+    font-size: 73px;
+}
+p{
+    font-size: 20px;
+
+}
+
+.navbar-collapse{
+    justify-content: flex-end;
+}
+
+.container{
+    padding: 0 8% !important;
+    margin: 0 0 !important;
+    
+}
+.navbar{
+    width: 100%;
+    padding: 1% 2% !important;
+}
+
+
+
+#body-container{
+    max-width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+
+
+.banner-item{
+    margin-top: 100px;
+    height: 650px !important;
+    display: inline-flex;
+    width: 100%;
+    background-image: url(decor.jpg);
+    background-size: 70% 90%;
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    
+}
+
+#home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    float: left;
+    width: 60%;
+    padding-left: 20px;
+}
+
+#home-shop-button{
+    text-decoration: none;
+    color: white;
+}
+
+#shop-button{
+    margin-top: 50px;
+    display: flex;
+    height: 80px;
+    width: 200px;
+    background-color: #9d8464;
+    justify-content: center;
+    align-items: center;
+
+}
+.highlight{
+    margin-bottom: 0;
+}
+
+#highlight-bio{
+    padding-right: 180px;
+}
+.icons{
+    display: flex;
+    
+    flex-direction: row;
+}
+.icons > a{
+    padding: 0 10px;
+}
+.nav-link{
+    font-size: 20px;
+    color: black;
+}
+
+.nav-link:hover{
+    color: black !important;
+}
+
+#company-services{
+    padding-top: 50px;
+}
+
+
+.services-img{
+    height: 50px;
+    width: 50px;
+}
+
+#navbar-form{
+    position: relative;
+}
+
+#form-container{
+    max-width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    padding: 0 !important;
+    
+}
+
+.form-div{
+    padding: 0 8% !important;
+}
+
+.form-div > form{
+    margin: 0 auto;
+    width: 30%;
+}
+
+#submit-button{
+    border-radius: 5px;
+    background-color: #9d8464;
+    border: none;
+}
+
+input:focus{
+    border-color: #9d8464 !important;
+    box-shadow: 0 0 0 0.25rem #9d8464 !important;
+    
+}
