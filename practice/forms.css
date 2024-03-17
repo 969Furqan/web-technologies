@@ -1,0 +1,66 @@
+
+        /* Styling for the form container */
+        .form-container {
+            background-color: #f2f2f2;
+            border-radius: 20px;
+            padding: 20px;
+            width: 400px;
+            margin: 0 auto;
+            margin-top: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for the form fields */
+        .form-field {
+            margin-bottom: 20px;
+        }
+
+        /* Styling for the input fields */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Styling for the submit button */
+        .submit-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Styling for the social media icons */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            color: #333;
+            font-size: 20px;
+        }
+
+        /* Override Bootstrap styles for floating island effect */
+        .form-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        
+
+        /* Override Bootstrap styles for rounded corners */
+        .form-field,
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        .submit-button {
+            border-radius: 20px;
+        }

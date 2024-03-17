@@ -1,0 +1,40 @@
+.navbar-collapse{
+    justify-content: flex-end;
+}
+
+.container{
+    padding: 0 10px !important;
+    margin: 0 0 !important;
+    
+}
+.navbar{
+    width: 100%;;
+}
+
+
+
+#body-container{
+    max-width: 100% !important;
+}
+
+
+.bxs-user{
+    height:20px !important;
+    width:20px !important;
+    display: flex;
+    color: black;
+}
+
+.banner-item{
+    height: 680px !important;
+    display: flex;
+    width: 100%;
+}
+
+#home{
+    
+    flex-direction: column;
+    justify-content: center;
+    float: left;
+    width: 60%;
+}
