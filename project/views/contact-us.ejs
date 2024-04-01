@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="/style.css">
+    <script>
+        
+        validationfuncction = function(){
+            var first_name = $("#first-name").val();
+            var last_name = $("#last-name").val();
+            var email = $("#email").val();
+            var message = $("#message").val();
+            if(first_name == ""){
+                alert("First Name is required");
+                return false;
+            }
+            if(last_name == ""){
+                alert("Last Name is required");
+                return false;
+            }
+            if(email == ""){
+                alert("Email is required");
+                return false;
+            }
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if(!emailPattern.test(email)){
+            alert('Please enter a valid email address.');
+            return;
+            }    
+
+            if(message == ""){
+                alert("message is required");
+                return false;
+            }
+            return true;
+        }
+
+        function submitfunction(event){
+            event.preventDefault();
+            if(validationfuncction()){
+                alert("Form Submitted");
+            }
+        }
+
+        doBindings = function(){
+            $("#submit-button").on("click", submitfunction);
+        }
+
+        $(document).ready(function(){
+            doBindings();
+        });
+        
+
+    </script>
+</head>
+<body id="body-home">
+    <div class="container" id="form-container">
+        <nav class="navbar navbar-expand-lg fixed-top" id="navbar-form">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">FurnitureWay</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/contact-us">Form</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/restful">Restful API</a>
+                  </li>
+                </ul>
+                <div class="icons">
+                    <a class="nav-link" href="#" id="icon2">
+                        <img src="assets/cart.svg" alt="user">
+                    </a>
+                    <a class="nav-link" href="#" id="icon1">
+                        <img src="assets/user.svg" alt="user">
+                    </a>
+                </div>
+              </div>
+            </div>
+          </nav>
+          <div class="form-div">
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="first-name" aria-describedby="emailHelp">
+                    
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="last-name" aria-describedby="emailHelp">
+                    
+                  </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label"></label>
+                  <textarea type="text" class="form-control" id="message"></textarea>
+                </div>
+                <button class="btn btn-primary" id="submit-button">Submit</button>
+              </form>
+          </div>
+</body>
+</html>
