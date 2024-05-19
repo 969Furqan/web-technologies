@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+
 </head>
 <body class="main_body">
     <%- include('headers/header') %> 
 
     <main>
-        <% if (page === 'home') { %>
+        <% if (page === 'home' || page === '') { %>
           <%- include('home')%>
           <!-- Add home page content here -->
         <% } else if (page === 'explore') { %>
@@ -22,6 +23,16 @@
         <% } else if (page === 'upload') { %>
           
           <%- include('upload') %>
+
+          <!-- Add explore page content here -->
+        <% } else if (page === 'login') { %>
+          
+          <%- include('login') %>
+
+          <!-- Add explore page content here -->
+        <% } else if (page === 'register') { %>
+          
+          <%- include('register') %>
 
           <!-- Add explore page content here -->
         <% } else if (page === 'categories') { %>

@@ -4,11 +4,14 @@ const { GridFsStorage } = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const mongoose = require('mongoose');
 const path = require('path');
+const user = require('../models/user');
+const passport = require('passport');
+const bcrypt = require('bcryptjs');
 
 const router = express.Router();
 
 // Mongo URI
-const mongoURI = 'mongodb://localhost:27017/wallpaperDB';
+const mongoURI = 'mongodb://localhost:27017/wallpapers';
 
 // Create mongo connection
 const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -28,8 +31,12 @@ router.get('/home', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('index', { page: 'home' });
+    res.render('index', {
+        page: 'home',
+        user: req.user  // Ensure `user` is passed to the template
+    });
 });
+
 
 // Explore route
 router.get('/explore', (req, res) => {
@@ -43,6 +50,44 @@ router.get('/upload', async (req, res) => {
   
 });
 
+router.get('/register', (req, res) => {
+  
+    res.render('index', { page: 'register'});
+  
+});
+
+router.get('/login', (req, res) => {
+  
+    res.render('index', { page: 'login'});
+  
+});
 
 
+
+// Login handle
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+}));
+
+// Register handle
+router.post("/register", async (req, res) => {
+    try {
+        let user = await user.findOne({ email: req.body.email });
+        if (user) {
+            return res.redirect("/auth/register?message=User already exists with that email");
+        }
+        user = new User({
+            email: req.body.email,
+            password: req.body.password, 
+            userName: req.body.userName
+        });
+        await user.save();
+        res.redirect("/login");
+    } catch (error) {
+        console.error("Registration Error:", error);
+        res.redirect("/register");
+    }
+});
 module.exports = router;
