@@ -1,0 +1,38 @@
+
+<div class="container">
+    <h1>HD Wallpapers</h1>
+    <div id="imageGrid" class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4"></div> <!-- Grid container -->
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/api/uploads')
+            .then(response => response.json())
+            .then(images => {
+                const grid = document.getElementById('imageGrid');
+                images.forEach(image => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = `/uploads/${image}`;
+                    imgElement.alt = 'Uploaded Image';
+                    imgElement.className = 'img-fluid';
+    
+                    const divElement = document.createElement('div');
+                    divElement.className = 'col';  // Use generic 'col' for flexibility with Masonry
+                    divElement.appendChild(imgElement);
+                    grid.appendChild(divElement);
+                });
+    
+                // Initialize Masonry after all images are appended to ensure they are loaded
+                const masonryInstance = new Masonry(grid, {
+                    itemSelector: '.col',
+                    percentPosition: true
+                });
+    
+                // This ensures that layout is correctly laid out after all images have loaded
+                images.forEach((image, index) => {
+                    grid.children[index].firstChild.onload = () => masonryInstance.layout();
+                });
+            })
+            .catch(error => console.error('Error loading the images:', error));
+    });
+    </script>
+    
