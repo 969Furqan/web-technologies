@@ -4,7 +4,7 @@ const { GridFsStorage } = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const mongoose = require('mongoose');
 const path = require('path');
-const user = require('../models/user');
+const User = require('../models/user');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 
@@ -64,6 +64,33 @@ router.get('/login', (req, res) => {
 
 
 
+
+
+
+router.post("/register", async (req, res) => {
+    try {
+        const existingUser = await User.findOne({ email: req.body.email });  // Use 'User' model correctly
+
+        if (existingUser) {
+            return res.redirect("/register?message=User already exists with that email");
+        }
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);  // Hash the password with a salt round of 10
+        console.log(req.body);
+        const newUser = new User({
+            email: req.body.email,
+            password: hashedPassword, 
+            username: req.body.username
+        });
+        await newUser.save();
+        res.redirect("/login");
+    } catch (error) {
+        console.error("Registration Error:", error);
+        res.redirect("/register");
+    }
+});
+
+
+
 // Login handle
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
@@ -71,23 +98,5 @@ router.post('/login', passport.authenticate('local', {
     failureFlash: true
 }));
 
-// Register handle
-router.post("/register", async (req, res) => {
-    try {
-        let user = await user.findOne({ email: req.body.email });
-        if (user) {
-            return res.redirect("/auth/register?message=User already exists with that email");
-        }
-        user = new User({
-            email: req.body.email,
-            password: req.body.password, 
-            userName: req.body.userName
-        });
-        await user.save();
-        res.redirect("/login");
-    } catch (error) {
-        console.error("Registration Error:", error);
-        res.redirect("/register");
-    }
-});
+
 module.exports = router;

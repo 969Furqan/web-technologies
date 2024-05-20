@@ -46,13 +46,29 @@ app.get('/api/uploads', (req, res) => {
 });
 
 
-// Initialize session middleware
+
+
+
+const flash = require('connect-flash');
+
+// Set up session middleware first
 app.use(session({
-  secret: 'secret', // Change the secret to a long, random string in production
-  resave: false,
-  saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/wallpapers' })
+    secret: 'YourSecretKey', // Replace 'YourSecretKey' with a real secret string
+    saveUninitialized: true,
+    resave: false,
+    store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/wallpapers' })
 }));
+
+// Then use flash middleware
+app.use(flash());
+
+// Setup to make the flash messages available to all views
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error'); // Used by Passport as per your setup
+    next();
+});
 
 
 
@@ -65,6 +81,39 @@ app.use((req, res, next) => {
 res.locals.user = req.user;  // Make user object globally accessible in views
 next();
 });
+
+// Create session store in cookies with a timer of 1 week
+app.use(session({
+  secret: 'YourSecretKey',
+  saveUninitialized: true,
+  resave: false,
+  store: MongoStore.create({
+    mongoUrl: 'mongodb://localhost:27017/wallpapers',
+    cookie: {
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 1 week in milliseconds
+    }
+  })
+}));
+
+
+
+app.get('/logout', (req, res, next) => {
+  req.logout(function(err) {  // Include a callback function to handle the logout process
+      if (err) {
+          return next(err);  // Handle possible errors during logout
+      }
+      req.session.destroy((err) => {  // Proceed to destroy the session
+          if (err) {
+              console.error('Failed to destroy the session during logout.', err);
+              return next(err);
+          }
+          res.clearCookie('connect.sid'); // Clear the session cookie, assuming 'connect.sid' is the cookie name
+          res.redirect('/login');  // Redirect to the login page after a successful logout
+      });
+  });
+});
+
+
 
 app.use('/', Router);
 app.use('/explore', Router);
