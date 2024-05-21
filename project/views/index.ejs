@@ -16,25 +16,30 @@
     <main>
         <% if (page === 'home' || page === '') { %>
           <%- include('home')%>
-          <!-- Add home page content here -->
+          <!-- Add explore page content here -->
         <% } else if (page === 'explore') { %>
           <%- include('explore')%>
-          <!-- Add explore page content here -->
+          <!-- Add upload page content here -->
         <% } else if (page === 'upload') { %>
           
           <%- include('upload') %>
 
-          <!-- Add explore page content here -->
+          <!-- Add login page content here -->
+        <% } else if (page === 'addcategory') { %>
+          
+          <%- include('addcategory') %>
+
+          <!-- Add login page content here -->
         <% } else if (page === 'login') { %>
           
           <%- include('login') %>
 
-          <!-- Add explore page content here -->
+          <!-- Add register page content here -->
         <% } else if (page === 'register') { %>
           
           <%- include('register') %>
 
-          <!-- Add explore page content here -->
+          <!-- Add categories page content here -->
         <% } else if (page === 'categories') { %>
           <%- include('categories', {categories: Categories})%>
           <!-- Add categories page content here -->

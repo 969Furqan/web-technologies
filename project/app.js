@@ -123,6 +123,7 @@ app.use('/upload', Router);
 app.use('/home', Router);
 app.use('/login', Router);
 app.use('/register', Router);
+app.use('/addcategory', Router);
 
 
 

@@ -1,37 +1,35 @@
-<h1>Upload Wallpaper</h1>
-    <form action="/upload"  enctype="multipart/form-data">
-      <div>
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
-      </div>
-      <div>
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" required></textarea>
-      </div>
-      <div>
-        <label for="image">Image:</label>
-        <input type="file" id="image" name="image" accept="image/*" required>
-      </div>
-      <div>
-        
-      </div>
-      <button type="submit">Upload</button>
-    </form>
-    <div class="create-category">
-      <!-- Add this form within your categories.ejs -->
 <div class="container mt-5">
-  <h2>Add New Category</h2>
-  <form action="/categories/add" method="POST">
-      <div class="mb-3">
-          <label for="categoryName" class="form-label">Name</label>
-          <input type="text" class="form-control" id="categoryName" name="name" required>
-      </div>
-      <div class="mb-3">
-          <label for="categoryDescription" class="form-label">Description</label>
-          <textarea class="form-control" id="categoryDescription" name="description" rows="3" required></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+  <h1 class="mb-4">Upload Wallpaper</h1>
+  <form action="/upload" enctype="multipart/form-data"></form>
+    <div class="mb-3">
+      <label for="title" class="form-label">Title:</label>
+      <input type="text" id="title" name="title" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description:</label>
+      <textarea id="description" name="description" class="form-control" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Image:</label>
+      <input type="file" id="image" name="image" class="form-control" accept="image/*" required>
+    </div>
+    <div class="mb-3">
+      <label for="categorySelect" class="form-label">Category</label>
+      <select class="form-select" id="categorySelect" name="category">
+          <% Categories.forEach(function(category) { %>
+              <option value="<%= category._id %>"><%= category.name %></option>
+          <% }); %>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="tagsInput" class="form-label">Tags (comma-separated)</label>
+      <input type="text" class="form-control" id="tagsInput" name="tags" placeholder="Enter tags, separated by commas">
+  </div>
+    <div>
+      <!-- Additional content here -->
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
   </form>
+
 </div>
 
-    </div>

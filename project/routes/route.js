@@ -43,11 +43,7 @@ router.get('/explore', (req, res) => {
 });
 
 // Upload GET route to render the upload form
-router.get('/upload', async (req, res) => {
-  
-    res.render('index', { page: 'upload'});
-  
-});
+
 
 router.get('/register', (req, res) => {
   
@@ -59,6 +55,13 @@ router.get('/login', (req, res) => {
   
     res.render('index', { page: 'login'});
   
+});
+
+router.get('/addcategory', (req, res) => {
+      
+     res.render('index', { page: 'addcategory'});
+      
+    
 });
 
 
@@ -99,7 +102,7 @@ router.post('/login', passport.authenticate('local', {
 
 
 
-router.post('/categories/add', async (req, res) => {
+router.post('/category/add', async (req, res) => {
     try {
         const { name, description } = req.body;
         const newCategory = new Category({
@@ -118,6 +121,16 @@ router.post('/categories/add', async (req, res) => {
     try {
         const Categories = await Category.find({});
         res.render('index', {page:'categories', Categories }); // Pass categories to the EJS template
+    } catch (error) {
+        console.error('Failed to fetch categories:', error);
+        res.status(500).send('Error loading categories');
+    }
+});
+
+router.get('/upload', async (req, res) => {
+    try {
+        const Categories = await Category.find({}); // Fetch all categories from the database
+        res.render('index', { page:'upload', Categories }); // Pass categories to the view
     } catch (error) {
         console.error('Failed to fetch categories:', error);
         res.status(500).send('Error loading categories');
