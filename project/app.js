@@ -115,6 +115,7 @@ app.get('/logout', (req, res, next) => {
 
 
 
+
 app.use('/', Router);
 app.use('/explore', Router);
 app.use('/categories', Router);

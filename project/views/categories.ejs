@@ -1,1 +1,16 @@
-<h1>categories</h1>
+<!-- categories.ejs -->
+<div class="container mt-4">
+    <div class="row">
+        <% categories.forEach(function(category) { %>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= category.name %></h5>
+                        <p class="card-text"><%= category.description %></p>
+                        <!-- Add more category details here -->
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>

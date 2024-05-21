@@ -36,7 +36,7 @@
 
           <!-- Add explore page content here -->
         <% } else if (page === 'categories') { %>
-          <%- include('categories')%>
+          <%- include('categories', {categories: Categories})%>
           <!-- Add categories page content here -->
         <% } %>
       </main>

@@ -7,6 +7,7 @@ const path = require('path');
 const User = require('../models/user');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
+const Category = require('../models/category');
 
 const router = express.Router();
 
@@ -21,9 +22,7 @@ const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true, useUni
 
 
 // Category routes
-router.get('/categories', (req, res) => {
-  res.render('index', { page: 'categories' });
-});
+
 
 // Home routes
 router.get('/home', (req, res) => {
@@ -98,5 +97,31 @@ router.post('/login', passport.authenticate('local', {
     failureFlash: true
 }));
 
+
+
+router.post('/categories/add', async (req, res) => {
+    try {
+        const { name, description } = req.body;
+        const newCategory = new Category({
+            name: name,
+            description: description
+        });
+        await newCategory.save();
+        res.redirect('/categories'); // Redirect back to categories page or to success page
+    } catch (error) {
+        console.error('Failed to add category:', error);
+        res.status(500).send('Failed to add category');
+    }
+  });
+
+  router.get('/categories', async (req, res) => {
+    try {
+        const Categories = await Category.find({});
+        res.render('index', {page:'categories', Categories }); // Pass categories to the EJS template
+    } catch (error) {
+        console.error('Failed to fetch categories:', error);
+        res.status(500).send('Error loading categories');
+    }
+});
 
 module.exports = router;

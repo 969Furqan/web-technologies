@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-top: 0; padding-bottom: 0; margin-top: 8px; margin-bottom: 8px;">
     <div class="container-fluid">
       <a class="navbar-brand" href="home">
         <img src="/path/to/your/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
@@ -8,9 +8,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <form class="d-flex flex-grow-1 mx-2" action="/search" method="GET">
-          <input class="form-control rounded-pill w-100" type="search" name="query" placeholder="Search high-resolution images" aria-label="Search">
-        </form>
+        
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/explore">Explore</a>
@@ -22,7 +20,7 @@
             <a class="nav-link" href="/upload">upload</a>
           </li>
           <% if (user) { %>
-            <li>Welcome, <%= user.username %></li>
+            <li class="nav-item"><a class="nav-link"></a>Welcome, <%= user.username %></a></li>
             <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
           <% } else { %> 
             <li class="nav-item">
