@@ -17,11 +17,11 @@
             <a class="nav-link" href="/categories">Categories</a>
           </li>
           
-          <% if (user) { %>
-            <li class="nav-item">
-              <a class="nav-link" href="/upload">upload</a>
-            </li>
+          <% if (user && user.role === 'admin') { %>
+            
             <li class="nav-item"><a class="nav-link" href="/addcategory">Add a category</a></li>
+            <% } %> <% if (user) { %>
+              <li class="nav-item"><a class="nav-link" href="/upload">upload</a></li>
             <li class="nav-item"><a class="nav-link">Welcome, <%= user.username %></a></li>
             <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
           <% } else { %> 
@@ -34,6 +34,7 @@
             <% } %>
           
         </ul>
+
       </div>
     </div>
   </nav>

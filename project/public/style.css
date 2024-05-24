@@ -56,3 +56,16 @@ footer {
     width: 100%; 
     height: auto; 
 }
+
+.masonry-item {
+            margin-bottom: 1em;
+        }
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+.pagination a {
+    margin: 0 0.5em;
+    text-decoration: none;
+}

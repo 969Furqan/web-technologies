@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <h1 class="mb-4">Upload Wallpaper</h1>
-  <form action="/upload" enctype="multipart/form-data"></form>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
     <div class="mb-3">
       <label for="title" class="form-label">Title:</label>
       <input type="text" id="title" name="title" class="form-control" required>
@@ -16,7 +16,7 @@
     <div class="mb-3">
       <label for="categorySelect" class="form-label">Category</label>
       <select class="form-select" id="categorySelect" name="category">
-          <% Categories.forEach(function(category) { %>
+          <% categories.forEach(function(category) { %>
               <option value="<%= category._id %>"><%= category.name %></option>
           <% }); %>
       </select>
@@ -24,12 +24,7 @@
     <div class="mb-3">
       <label for="tagsInput" class="form-label">Tags (comma-separated)</label>
       <input type="text" class="form-control" id="tagsInput" name="tags" placeholder="Enter tags, separated by commas">
-  </div>
-    <div>
-      <!-- Additional content here -->
     </div>
     <button type="submit" class="btn btn-primary">Upload</button>
   </form>
-
 </div>
-
