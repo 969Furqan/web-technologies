@@ -12,12 +12,14 @@ const upload = require('../public/Uploads/upload');
 
 const router = express.Router();
 
-// Mongo URI
-const mongoURI = 'mongodb://localhost:27017/wallpapers';
-
-// Create mongo connection
-const conn = mongoose.createConnection(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
-
+// Connect to MongoDB
+mongoose.connect("mongodb://localhost:27017/wallpapers")
+    .then((data) => {
+        console.log("DB Connected");
+    })
+    .catch(err => {
+        console.error("DB Connection Error: ", err);
+    });
 
 
 // Home routes
@@ -74,7 +76,7 @@ router.post('/login', passport.authenticate('local', {
     failureFlash: true
 }));
 
-router.post('/category/add', async (req, res) => {
+router.post('/addcategory/add', async (req, res) => {
     try {
         const { name, description } = req.body;
         const newCategory = new Category({
