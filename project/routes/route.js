@@ -21,7 +21,9 @@ mongoose.connect("mongodb://localhost:27017/wallpapers")
 // Home routes
 router.get('/home', async (req, res) => {
     try {
-        const categories = await Category.find().limit(5); // Fetches 5 random categories
+        const categories = await Category.aggregate([
+            { $sample: { size: 5 } }
+        ]);// Fetches 5 random categories
         // Other logic for the page if necessary...
         res.render('index', {
             page:'home', // Assuming 'explore' is your EJS file for this page
@@ -35,11 +37,22 @@ router.get('/home', async (req, res) => {
     };
 });
 
-router.get('/', (req, res) => {
-    res.render('index', {
-        page: 'home',
-        user: req.session.user // Ensure `user` is passed to the template
-    });
+router.get('/', async (req, res) => {
+    try {
+        const categories = await Category.aggregate([
+            { $sample: { size: 5 } }
+        ]); // Fetches 5 random categories
+        // Other logic for the page if necessary...
+        res.render('index', {
+            page:'home', // Assuming 'explore' is your EJS file for this page
+            categories,
+            user: req.session.user
+            // other variables if needed
+        });
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        res.status(500).send('Server error when fetching categories');
+    };
 });
 
 
