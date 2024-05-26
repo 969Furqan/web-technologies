@@ -1,8 +1,11 @@
 <!-- categories.ejs -->
-<div class="container mt-4">
+<div class="container text-black">
+    <h1 class="text-white pd">Categories</h1>
     <div class="row">
         <% categories.forEach(function(category) { %>
-            <div class="col-md-4 mb-4">
+            
+            <div class="col-md-3 mb-3">
+                <a href="/category/<%= category.id %>" class="explore-card-link">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><%= category.name %></h5>
@@ -10,7 +13,9 @@
                         <!-- Add more category details here -->
                     </div>
                 </div>
+            </a>
             </div>
+        
         <% }); %>
     </div>
 </div>

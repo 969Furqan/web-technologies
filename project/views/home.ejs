@@ -7,12 +7,9 @@
             <button class="btn btn-light rounded-pill" type="submit">Search</button>
         </form>
         <div>
-            <a href="#" class="btn btn-outline-light btn-sm mx-1">Nature</a>
-            <a href="#" class="btn btn-outline-light btn-sm mx-1">Cities</a>
-            <a href="#" class="btn btn-outline-light btn-sm mx-1">People</a>
-            <a href="#" class="btn btn-outline-light btn-sm mx-1">Animals</a>
-            <a href="#" class="btn btn-outline-light btn-sm mx-1">Travel</a>
-            <a href="#" class="btn btn-outline-light btn-sm mx-1">Mountains</a>
+            <% categories.forEach(function(category) { %>
+                <a href="/category/<%= category._id %>" class="btn btn-outline-light btn-sm mx-1"><%= category.name %></a>
+            <% }); %>
         </div>
         <div class="mt-4">
             <p>Join our community to share your photos and stories.</p>

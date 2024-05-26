@@ -8,7 +8,7 @@
                 <a href="/result/<%= wallpaper._id %>" class="explore-card-link">
                     <div class="card explore-card">
                         <img src="data:<%= wallpaper.img.contentType %>;base64,<%= wallpaper.img.data.toString('base64') %>" class="card-img-top" alt="<%= wallpaper.title %>">
-                        <div class="card-body">
+                        <div class="card-body text-black">
                             <h5 class="card-title"><%= wallpaper.title %></h5>
                             <p class="card-text"><%= wallpaper.description %></p>
                         </div>

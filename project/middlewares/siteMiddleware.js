@@ -9,7 +9,6 @@ module.exports = async function (req, res, next) {
     };
     res.locals.flash = req.session.flash;
     req.session.flash = null;
-  
     res.locals.user = req.session.user;
     next();
   };

@@ -49,8 +49,13 @@
 }
 
 footer {
+    
     clear: both; /* Clears the floating elements above, ensuring footer stays at the bottom */
-   
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    position: absolute;
+    
 }
 
 .img-fluid {
@@ -73,6 +78,7 @@ footer {
 .explore-card {
     transition: transform 0.2s !important; /* Animation */
     cursor: pointer !important; /* Change mouse cursor on hover */
+    color: black !important;
 }
 .explore-card:hover {
     transform: scale(1.05); /* Scale up the card */
@@ -113,18 +119,9 @@ footer {
     line-height: 1.5; /* Increased line height for better readability */
 }
 
-#wallpaperCarousel .carousel-inner {
-    display: flex;
-    overflow: hidden;
-}
 
-#wallpaperCarousel .carousel-item {
-    flex: 0 0 auto; /* Do not grow or shrink but respect width */
-}
 
-#wallpaperCarousel img {
-    width: auto; /* Maintain original image width */
-    height: 100px; /* Set a fixed height */
-    object-fit: cover; /* Cover the area without losing aspect ratio */
+.card-img-top{
+    padding: 5px;
 }
 

@@ -1,0 +1,51 @@
+<style>
+    .container {
+        display: flex;
+        flex-direction: column; /* Aligns the cards vertically */
+    }
+    .row {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+         /* Hides anything outside the card boundary */
+    }
+    
+</style>
+<div class="container">
+    <h1>Delete Wallpapers</h1>
+    <% wallpapers.forEach(function(wallpaper) { %>
+        <div class="row mb-3" style="max-height: 300px;"> <!-- Each wallpaper is a row with a maximum height of 200px -->
+            <!-- Image Column -->
+            <div class="col-md-4 d-flex align-items-center" style="overflow: hidden;"> <!-- Uses flex to center the image vertically -->
+                <img class="img-fluid" style="min-height: 100%; width: auto; max-height: 200px;" src="data:<%=wallpaper.img.contentType%>;base64,<%=wallpaper.img.data.toString('base64')%>" alt="<%= wallpaper.title %>">
+            </div>
+            <!-- Details Column -->
+            <div class="col-md-8 d-flex flex-column justify-content-between" style="overflow: hidden;"> <!-- Overflow hidden to maintain height -->
+                <div>
+                    <h3><%= wallpaper.title %></h3>
+                    <p>Uploaded by: <%= wallpaper.uploaderId.username %></p>
+                    <p>Date: <%= wallpaper.uploadDate.toDateString() %></p>
+                    <p>Category: <%= wallpaper.categoryId ? wallpaper.categoryId.name : 'No Category' %></p>
+                    <p>Tags: <%= wallpaper.tags.join(', ') %></p>
+                </div>
+                <div class="d-grid gap-2 d-md-block">
+                    <button class="btn btn-danger " onclick="deleteWallpaper('<%= wallpaper._id %>')">Delete</button>
+                  </div>
+            </div>
+        </div>
+    <% }); %>
+</div>
+    <script>
+        function deleteWallpaper(id) {
+            fetch('/api/wallpapers/delete/' + id, { method: 'DELETE' })
+                .then(res => res.json())
+                .then(data => {
+                    if(data.success) {
+                        window.location.reload(); // Reload the page to update the list
+                    } else {
+                        alert('Failed to delete wallpaper');
+                    }
+                })
+                .catch(err => console.error('Error:', err));
+        }
+    </script>

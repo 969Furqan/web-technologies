@@ -13,6 +13,7 @@
                 <h1 class="fw-bold mb-3">Title: <%= wallpaper.title %></h1>
                 <p class="text-muted"><strong>Description:</strong> <%= wallpaper.description %></p>
                 <p class="text-muted"><strong>Uploaded by:</strong> <%= wallpaper.uploaderId.username %></p>
+                <p class="text-muted"><strong>Category:</strong> <%= wallpaper.categoryId.name %></p>
                 <p class="text-muted"><strong>Uploaded on:</strong> <%= new Date(wallpaper.uploadDate).toLocaleDateString("en-US") %></p>
                 <p><strong>Tags:</strong> 
                     <% wallpaper.tags.forEach(function(tag) { %>

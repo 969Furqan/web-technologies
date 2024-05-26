@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const passport = require('passport');
 const Router = require('./routes/route');
 const flashes = require("./middlewares/siteMiddleware");
 const isLoggedIn = require("./middlewares/authMiddleware");
@@ -36,16 +35,6 @@ app.use(session({
 }));
 
 
-// Passport config
-require('./config/passport')(passport);
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Middleware to make user globally available
-app.use((req, res, next) => {
-    res.locals.user = req.user;
-    next();
-});
 
 
 
@@ -65,19 +54,13 @@ app.use('/addcategory', Router);
 
 
 
-    // Logout route
-    app.get('/logout', isLoggedIn, (req, res, next) => {
-        const sessionId = req.sessionID; // Get the session ID
-        //console.log(req.session.user.username + ' is logging out');
-        req.session.destroy((err) => {
-            if (err) {
-                console.error('Error destroying session:', err);
-            } else {
-                console.log('Session destroyed');
-                res.redirect('/login'); // Redirect to login page after logout
-            }
-        });
-    });
+
+// Logout route
+app.get('/logout', isLoggedIn, (req, res, next) => {
+    req.session.user = null;
+    res.flash("success", "Logged out Successfully");
+    res.redirect("/");
+});
 
 
 
