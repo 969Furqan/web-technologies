@@ -26,7 +26,7 @@
      </div>
      <% } %>
 
-    <main>
+    <main class="<%= page === 'home' || page === '' ? 'flex-grow-0' : 'flex-grow-1' %>">
       <% if (page === 'home' || page === '') { %>
           <%- include('home') %>
       <% } else if (page === 'explore') { %>

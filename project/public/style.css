@@ -1,3 +1,15 @@
+
+html, body {
+    height: 100%; /* Make sure the html and body are at least as tall as the viewport */
+    margin: 0; /* Reset default margin */
+}
+
+body {
+    display: flex; /* Use flexbox to control the layout */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: space-between; /* Space between items, pushing footer to the bottom */
+}
+
 /* Custom styles for the navbar */
 .navbar {
     background-color: #f8f9fa !important;
@@ -19,6 +31,14 @@
 
 .nav-link:active {
     color: #6c757d !important;
+}
+
+footer {
+    width: 100%;
+    background-color: #343a40; /* Adjusted to match Bootstrap's bg-dark class */
+    color: white;
+    padding: 20px;
+    text-align: center;
 }
 
 .container {
@@ -48,15 +68,7 @@
     position: relative;
 }
 
-footer {
-    
-    clear: both; /* Clears the floating elements above, ensuring footer stays at the bottom */
-    width: 100%;
-    text-align: center;
-    bottom: 0;
-    position: absolute;
-    
-}
+
 
 .img-fluid {
     width: 100%; 
@@ -125,3 +137,12 @@ footer {
     padding: 5px;
 }
 
+main{
+    flex-grow: 1;
+}
+
+.row-masonry{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}

@@ -204,10 +204,10 @@ router.get('/explore', async (req, res) => {
         const limit = 10; // Number of wallpapers per page
         const skip = (page - 1) * limit;
 
-        const wallpapers = await Wallpaper.find({})
-            .sort({ uploadDate: -1 }) // Sort by upload date, latest first
-            .skip(skip)
-            .limit(limit);
+        const wallpapers = await Wallpaper.aggregate([
+            { $skip: skip },
+            { $limit: limit }
+        ]);
 
         const count = await Wallpaper.countDocuments(); // Total number of wallpapers
         const totalPages = Math.ceil(count / limit);
