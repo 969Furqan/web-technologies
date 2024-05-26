@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <div class="row g-4 align-items-center">
+        <!-- Image Column -->
+        <div class="col-lg-6">
+            <div class="image-frame">
+                <img src="data:<%= wallpaper.img.contentType %>;base64,<%= wallpaper.img.data.toString('base64') %>" alt="<%= wallpaper.title %>" class="img-fluid rounded shadow-lg">
+            </div>
+        </div>
+
+        <!-- Details Column -->
+        <div class="col-lg-6">
+            <div class="details-box p-4 shadow rounded bg-white">
+                <h1 class="fw-bold mb-3">Title: <%= wallpaper.title %></h1>
+                <p class="text-muted"><strong>Description:</strong> <%= wallpaper.description %></p>
+                <p class="text-muted"><strong>Uploaded by:</strong> <%= wallpaper.uploaderId.username %></p>
+                <p class="text-muted"><strong>Uploaded on:</strong> <%= new Date(wallpaper.uploadDate).toLocaleDateString("en-US") %></p>
+                <p><strong>Tags:</strong> 
+                    <% wallpaper.tags.forEach(function(tag) { %>
+                        <span class="tag badge bg-primary me-1"><%= tag %></span>
+                    <% }); %>
+                </p>
+                <!-- Download Button -->
+                <a href="data:<%= wallpaper.img.contentType %>;base64,<%= wallpaper.img.data.toString('base64') %>" download="<%= wallpaper.title %>.<%= wallpaper.img.contentType.split('/')[1] %>" class="btn btn-primary mt-3">Download Image</a>
+            </div>
+        </div>
+    </div>
+</div>

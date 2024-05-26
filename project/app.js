@@ -3,9 +3,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
-const MongoStore = require('connect-mongo');
-const flash = require('connect-flash');
 const Router = require('./routes/route');
+const flashes = require("./middlewares/siteMiddleware");
+const isLoggedIn = require("./middlewares/authMiddleware");
 
 const app = express();
 
@@ -32,18 +32,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'YourSecretKey', // Replace 'YourSecretKey' with a real secret string
     saveUninitialized: true,
-    resave: false,
-    store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/wallpapers' })
+    resave: false    
 }));
 
-// Flash messages setup
-app.use(flash());
-app.use((req, res, next) => {
-    res.locals.success_msg = req.flash('success_msg');
-    res.locals.error_msg = req.flash('error_msg');
-    res.locals.error = req.flash('error'); // Used by Passport as per your setup
-    next();
-});
 
 // Passport config
 require('./config/passport')(passport);
@@ -56,7 +47,12 @@ app.use((req, res, next) => {
     next();
 });
 
+
+
+
 // Routes
+
+app.use(flashes);
 app.use('/', Router);
 app.use('/explore', Router);
 app.use('/categories', Router);
@@ -68,22 +64,22 @@ app.use('/addcategory', Router);
 
 
 
-// Logout route
-app.get('/logout', (req, res, next) => {
-    req.logout(function(err) {
-        if (err) {
-            return next(err);
-        }
+
+    // Logout route
+    app.get('/logout', isLoggedIn, (req, res, next) => {
+        const sessionId = req.sessionID; // Get the session ID
+        //console.log(req.session.user.username + ' is logging out');
         req.session.destroy((err) => {
             if (err) {
-                console.error('Failed to destroy the session during logout.', err);
-                return next(err);
+                console.error('Error destroying session:', err);
+            } else {
+                console.log('Session destroyed');
+                res.redirect('/login'); // Redirect to login page after logout
             }
-            res.clearCookie('connect.sid');
-            res.redirect('/login');
         });
     });
-});
+
+
 
 // Start server
 const PORT = process.env.PORT || 3000;

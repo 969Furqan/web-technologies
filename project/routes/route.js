@@ -1,14 +1,11 @@
 const express = require('express');
-const multer = require('multer');
-const { GridFsStorage } = require('multer-gridfs-storage');
 const mongoose = require('mongoose');
-const path = require('path');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const Category = require('../models/category');
 const Wallpaper = require('../models/wallpaper');
-const upload = require('../public/Uploads/upload');
+const upload = require('../middlewares/upload');
 
 const router = express.Router();
 
@@ -30,7 +27,7 @@ router.get('/home', (req, res) => {
 router.get('/', (req, res) => {
     res.render('index', {
         page: 'home',
-        user: req.user  // Ensure `user` is passed to the template
+        user: req.user // Ensure `user` is passed to the template
     });
 });
 
@@ -72,7 +69,7 @@ router.post("/register", async (req, res) => {
 
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/login',
+    failureRedirect: '/login?message= unable to login',
     failureFlash: true
 }));
 
@@ -169,6 +166,84 @@ router.get('/explore', async (req, res) => {
     } catch (error) {
         console.error('Failed to fetch wallpapers:', error);
         res.status(500).send('Error loading wallpapers');
+    }
+});
+
+
+router.get('/result/:id', async (req, res) => {
+    try {
+        // Fetch the wallpaper and populate the 'uploadedBy' field
+        const wallpaper = await Wallpaper.findById(req.params.id).populate('uploaderId', 'username'); // Specifying fields to return. Adjust as necessary.
+
+        if (!wallpaper) {
+            return res.status(404).send("Wallpaper not found");
+        }
+
+        res.render('index', { page: 'result', wallpaper: wallpaper, user: req.user });
+    } catch (error) {
+        console.error("Error fetching wallpaper details:", error);
+        res.status(500).send("Error loading wallpaper details");
+    }
+});
+
+// Example route in your Express app
+router.get('/random-wallpapers', async (req, res) => {
+    try {
+        const wallpapers = await Wallpaper.aggregate([
+            { $sample: { size: 8 } }  // Adjust size to control number of random wallpapers
+        ]);
+        res.json(wallpapers);
+    } catch (err) {
+        res.status(500).send('Server error');
+    }
+});
+
+
+router.get('/search', async (req, res) => {
+    const searchQuery = req.query.query || '';  // Ensure it's a string, default to empty if undefined
+
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = 4;  // Number of wallpapers per page
+        const skip = (page - 1) * limit;
+
+        // Ensure we only attempt a search if there is a non-empty query
+        if (searchQuery.trim()) {
+            const wallpapers = await Wallpaper.find({
+                tags: { $regex: searchQuery, $options: 'i' }
+            })
+            .sort({ uploadDate: -1 })
+            .skip(skip)
+            .limit(limit);
+
+            const count = await Wallpaper.countDocuments({
+                tags: { $regex: searchQuery, $options: 'i' }
+            });
+
+            const totalPages = Math.ceil(count / limit);
+
+            res.render('index', {
+                page: 'search',
+                wallpapers,
+                currentPage: page,
+                totalPages,
+                user: req.user,
+                searchQuery
+            });
+        } else {
+            // Handle the case where there is no valid search query
+            res.render('index', {
+                page: 'search',
+                wallpapers: [],
+                currentPage: 1,
+                totalPages: 1,
+                user: req.user,
+                searchQuery: ''
+            });
+        }
+    } catch (error) {
+        console.error('Search error:', error);
+        res.status(500).send('Failed to execute search');
     }
 });
 

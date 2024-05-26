@@ -1,11 +1,21 @@
-<header class="bg-dark text-white text-center py-5">
+<div class="py-5">
     <div class="container">
         <h1 class="display-4">Explore Stunning Photos</h1>
-        <p class="lead">Discover amazing photography from around the world</p>
-        <form class="d-flex flex-grow-1 mx-2" action="/search" method="GET">
-            <input class="form-control rounded-pill w-100" type="search" name="query" placeholder="Search high-resolution images" aria-label="Search">
+        <p class="lead">Discover amazing photography from around the world.</p>
+        <form class="d-flex flex-grow-1 mx-2 my-4" action="/search" method="GET">
+            <input class="form-control rounded-pill me-2" type="search" name="query" placeholder="Search high-resolution images" aria-label="Search">
+            <button class="btn btn-light rounded-pill" type="submit">Search</button>
         </form>
-        
+        <div>
+            <a href="#" class="btn btn-outline-light btn-sm mx-1">Nature</a>
+            <a href="#" class="btn btn-outline-light btn-sm mx-1">Cities</a>
+            <a href="#" class="btn btn-outline-light btn-sm mx-1">People</a>
+            <a href="#" class="btn btn-outline-light btn-sm mx-1">Animals</a>
+            <a href="#" class="btn btn-outline-light btn-sm mx-1">Travel</a>
+            <a href="#" class="btn btn-outline-light btn-sm mx-1">Mountains</a>
+        </div>
+        <div class="mt-4">
+            <p>Join our community to share your photos and stories.</p>
+        </div>
     </div>
-</header>
-
+</div>

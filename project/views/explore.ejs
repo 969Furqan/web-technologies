@@ -1,43 +1,31 @@
-<style>
-        .masonry-item {
-            margin-bottom: 1em;
-        }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 1em;
-        }
-        .pagination a {
-            margin: 0 0.5em;
-            text-decoration: none;
-        }
-    </style>
-</head>
 
-    <div class="container">
-        <div class="row">
-            <% wallpapers.forEach(wallpaper => { %>
-                <div class="col-sm-6 col-md-4 col-lg-3 masonry-item">
-                    <div class="card">
+    
+<div class="container">
+    <h1>Explore</h1>
+    <div class="row">
+        <% wallpapers.forEach(wallpaper => { %>
+            <div class="col-sm-6 col-md-4 col-lg-3 masonry-item">
+                <a href="/result/<%= wallpaper._id %>" class="explore-card-link">
+                    <div class="card explore-card">
                         <img src="data:<%= wallpaper.img.contentType %>;base64,<%= wallpaper.img.data.toString('base64') %>" class="card-img-top" alt="<%= wallpaper.title %>">
                         <div class="card-body">
                             <h5 class="card-title"><%= wallpaper.title %></h5>
                             <p class="card-text"><%= wallpaper.description %></p>
                         </div>
                     </div>
-                </div>
-            <% }); %>
-        </div>
-        <div class="pagination">
-            <% if (currentPage > 1) { %>
-                <a href="/explore?page=<%= currentPage - 1 %>">Previous</a>
-            <% } %>
-            <% for (let i = 1; i <= totalPages; i++) { %>
-                <a href="/explore?page=<%= i %>" class="<%= currentPage === i ? 'active' : '' %>"><%= i %></a>
-            <% } %>
-            <% if (currentPage < totalPages) { %>
-                <a href="/explore?page=<%= currentPage + 1 %>">Next</a>
-            <% } %>
-        </div>
+                </a>
+            </div>
+        <% }); %>
     </div>
-
+    <div class="pagination">
+        <% if (currentPage > 1) { %>
+            <a href="/explore?page=<%= currentPage - 1 %>">Previous</a>
+        <% } %>
+        <% for (let i = 1; i <= totalPages; i++) { %>
+            <a href="/explore?page=<%= i %>" class="<%= currentPage === i ? 'active' : '' %>"><%= i %></a>
+        <% } %>
+        <% if (currentPage < totalPages) { %>
+            <a href="/explore?page=<%= currentPage + 1 %>">Next</a>
+        <% } %>
+    </div>
+</div>
