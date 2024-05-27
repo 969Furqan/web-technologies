@@ -40,8 +40,10 @@
       <% } else if (page === 'search') { %>
         <%- include('search') %>
       <% } else if (page === 'register') { %>
-          <%- include('register') %>
-      <% } else if (page === 'categoryresult') { %>
+        <%- include('register') %>
+        <% } else if (page === 'searchhistory') { %>
+        <%- include('searchHistory') %>
+        <% } else if (page === 'categoryresult') { %>
         <%- include('categoryresult') %>
     <% } else if (page === 'delete') { %>
         <%- include('delete') %>

@@ -243,10 +243,14 @@ router.get('/result/:id', async (req, res) => {
 
 router.get('/search', async (req, res) => {
     const searchQuery = req.query.query || '';  // Ensure it's a string, default to empty if undefined
+    
+    if (!req.session.recentSearches) {
+        req.session.recentSearches = [];
+    }
 
     try {
         const page = parseInt(req.query.page) || 1;
-        const limit = 4;  // Number of wallpapers per page
+        const limit = 10;  // Number of wallpapers per page
         const skip = (page - 1) * limit;
 
         // Ensure we only attempt a search if there is a non-empty query
@@ -263,6 +267,15 @@ router.get('/search', async (req, res) => {
             });
 
             const totalPages = Math.ceil(count / limit);
+
+            // Check if the query already exists in the session's recent searches
+            const index = req.session.recentSearches.indexOf(searchQuery);
+            if (index !== -1) {
+                // Remove the existing entry
+                req.session.recentSearches.splice(index, 1);
+            }
+            req.session.recentSearches.push(searchQuery);
+            console.log(req.session.recentSearches);
 
             res.render('index', {
                 page: 'search',
@@ -285,6 +298,16 @@ router.get('/search', async (req, res) => {
         console.error('Search error:', error);
         res.status(500).send('Failed to execute search');
     }
+});
+
+router.get('/searchhistory', (req, res) => {
+    // Ensure there's a default value for recentSearches if it doesn't exist
+    const recentSearches = req.session.recentSearches || [];
+    res.render('index', { 
+        page: 'searchhistory', 
+        user: req.session.user, // passing user if needed
+        recentSearches: recentSearches // This should match the variable name used in your EJS
+    });
 });
 
 router.get('/delete',adminauth, async (req, res) => {
