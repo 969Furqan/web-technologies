@@ -40,6 +40,19 @@ build/Release
 
 # Dependency directories
 node_modules/
+assignment_1/node_modules/
+assignment_2/node_modules/
+assignment_3/node_modules/
+assignment_4/node_modules/
+labTask_1/node_modules/
+labTask_2/node_modules/
+labTask_3/node_modules/
+labTask_4/node_modules/
+final/node_modules/
+midTerm/node_modules/
+practice/node_modules/
+project/node_modules/
+
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)

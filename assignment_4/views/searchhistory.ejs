@@ -1,0 +1,14 @@
+<div class="container">
+    <h1 class="text-white">Search History</h1>
+
+    <!-- Check if there are recent searches and display them -->
+    <% if (recentSearches && recentSearches.length > 0) { %>
+        <ul class="list-group">
+            <% recentSearches.forEach(function(search) { %>
+                <li class="list-group-item"><%= search %></li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <p class="text-white">No recent searches found.</p>
+    <% } %>
+</div>

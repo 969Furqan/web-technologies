@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-top: 0; padding-bottom: 0; margin-top: 8px; margin-bottom: 8px;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/home">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAXBJREFUSEvV1U9LFlEUx/HPA0Er26VCEIiBvgAXkgjSIhDU6E0IuhNUKt1qiqGufQ9CEhQtaiEihDs3tYhQcKEIQuBKhJwrIwzj/GOGZ9FZDdx7ft9zzj3nTEubrdVmfVUA3fiEgVQwB5jAaVGQZYDH2MezHJHfeI7zPEgRIIjvor+kjL8whIuse0nAK6xUECx7tp+YxedwMQk4wZMy74rnf9CbBvwrcP6ILXyJ74xiCuMFPrfBJzPIAyxgOUfoPd7knFUChMhfx4HMYQbX2MR6LPwdIxmQSoBB/MAS3qVEQlYhuzALO3UBDyPhq3iYulIiZwhD2Bm9R/hOW6UMOqKWuywBPIpK97cuYBh7JSV6gW91AclHXsQkHmADawid9zVaJy/rAoJf6J4POa24ivkmbXrnux23ZihXsDFMRx0WBi7PKj1yxc2Qee0e4BhPmygmfI/Qk14VYZuGmvY1hBzibdY2baib7V72R2sM/f8BNwOOQhnn9E/TAAAAAElFTkSuQmCC" alt="Logo" width="30" height="30" class="d-inline-block align-text-top"/>
+        MyPhotoGallery
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/explore">Explore</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/categories">Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/searchhistory">search history</a>
+          </li>
+          
+          <% if (user && user.role === 'admin') { %>
+            
+            <li class="nav-item"><a class="nav-link" href="/addcategory">Add a category</a></li>
+            <li class="nav-item"><a class="nav-link" href="/delete">wallpaper management</a></li>
+            <% } %> <% if (user) { %>
+              <li class="nav-item"><a class="nav-link" href="/upload">upload</a></li>
+              
+            <li class="nav-item"><a class="nav-link">Welcome, <%= user.name %></a></li>
+            <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+          <% } else { %> 
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register">Register</a>
+            </li>
+            <% } %>
+          
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+  

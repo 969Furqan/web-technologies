@@ -1,0 +1,19 @@
+
+<div class="create-category">
+    <!-- Add this form within your categories.ejs -->
+    <div class="container mt-5">
+    <h2>Add New Category</h2>
+    <form action="/addcategory/add" method="POST">
+        <div class="mb-3">
+            <label for="categoryName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="categoryName" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="categoryDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="categoryDescription" name="description" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div>
+
+</div>

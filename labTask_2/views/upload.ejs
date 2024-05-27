@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <h1 class="mb-4">Upload Wallpaper</h1>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title:</label>
+      <input type="text" id="title" name="title" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description:</label>
+      <textarea id="description" name="description" class="form-control" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Image:</label>
+      <input type="file" id="image" name="image" class="form-control" accept="image/*" required>
+    </div>
+    <div class="mb-3">
+      <label for="categorySelect" class="form-label">Category</label>
+      <select class="form-select" id="categorySelect" name="categoryId">
+          <% categories.forEach(function(category) { %>
+              <option value="<%= category._id %>"><%= category.name %></option>
+          <% }); %>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="tagsInput" class="form-label">Tags (comma-separated)</label>
+      <input type="text" class="form-control" id="tagsInput" name="tags" placeholder="Enter tags, separated by commas">
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+  </form>
+</div>
